@@ -1,0 +1,146 @@
+Final Project - CI/CD & GitOps Pipeline
+Objective
+Build a complete DevOps pipeline that automatically builds, scans, packages, and deploys a containerized application to Kubernetes using GitOps principles.
+
+Mandatory Requirements (Passing Grade)
+Application
+Create a simple web application (Flask, Node.js, React, Java Spring Boot, etc.) displaying:
+Hello World
+
+
+Source Control
+Store all code in GitHub.
+Repository must contain:
+.
+├── app/
+├── Dockerfile
+├── Jenkinsfile
+├── k8s/
+│   ├── deployment.yaml
+│   └── service.yaml
+├── README.md
+
+
+CI Pipeline (Jenkins)
+The Jenkins pipeline must:
+Clone the GitHub repository
+Build the application
+Build a Docker image
+Tag the image
+Push the image to Docker Hub
+Deploy to Kubernetes
+Pipeline must be implemented using:
+Jenkinsfile
+
+
+Containerization
+Create a Dockerfile for the application.
+Build image:
+docker build -t <dockerhub-user>/hello-world:v1 .
+
+Push image:
+docker push <dockerhub-user>/hello-world:v1
+
+
+Kubernetes Deployment
+Deploy the application using:
+deployment.yaml
+Requirements:
+Minimum 2 replicas
+Resource requests and limits
+
+service.yaml
+Requirements:
+NodePort or LoadBalancer
+Application accessible from browser
+
+
+
+Documentation
+README must include:
+Project overview
+Jenkins screenshots ( Screenshot of a successful pipeline in Jenkins )
+Deployment instructions
+Troubleshooting section
+
+Advanced Requirements 
+Security Scan (Trivy)
+Scan Docker image before pushing:
+trivy image hello-world:v1
+
+Fail pipeline on CRITICAL vulnerabilities.
+
+Helm
+Convert Kubernetes manifests into a Helm Chart.
+Structure:
+helm/
+└── hello-world/
+    ├── Chart.yaml
+    ├── values.yaml
+    └── templates/
+
+Deploy using:
+helm install hello-world .
+
+
+Argo CD (GitOps)
+Deploy the application using Argo CD.
+Requirements:
+Create an Argo Application
+Synchronize automatically from GitHub
+
+
+Multi-Environment Deployment
+Create:
+environments/
+├── dev
+├── stage
+└── prod
+
+Each environment should have different:
+Replica count
+Image tags
+Resource limits
+
+Argo CD App of Apps
+Create a parent application that manages:
+Dev environment
+Stage environment
+Prod environment
+Automatically deploy all environments from Git.
+
+Argo Rollouts (Canary Deployment)
+Implement Canary deployment.
+Requirements:
+Gradual traffic shift
+At least 3 rollout steps
+Rollback demonstration
+Example:
+20%
+50%
+100%
+
+
+Bonus Features
+
+Horizontal Pod Autoscaler
+Implement automatic scaling based on CPU usage.
+
+Architecture
+GitHub
+↓
+Jenkins CI
+↓
+Trivy Security Scan
+↓
+Docker Hub
+↓
+Helm Package
+↓
+Git Repository (GitOps)
+↓
+Argo CD
+↓
+Kubernetes Cluster
+↓
+Argo Rollouts Canary Deployment
