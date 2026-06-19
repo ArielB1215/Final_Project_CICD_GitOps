@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
-                sh 'docker run -t final_project:0.0.1'
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker run -t final_project:0.0.1'
             }
         }
     }
