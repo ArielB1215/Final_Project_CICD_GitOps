@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 $$ docker build -t final_project:0.0.1 .'
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker build -t final_project:0.0.1 .'
             }
         }
     }
