@@ -9,19 +9,28 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker build -t final_project:0.0.1 .'
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker build -t final_project .'
             }
         }
         stage('Docker Run') {
             steps {
-                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker run -t final_project:0.0.1'
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker run -t final_project'
             }
         }
-        stage('Docker Login % Push') {
+        stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &&
+                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    '''
+                }
+            }
+        }
+        stage('Docker Tag & Push') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                    export DOCKER_HOST=tcp://host.docker.internal:2375 && docker tag final_project arielbm5911/finalproject:latest
                     export DOCKER_HOST=tcp://host.docker.internal:2375 && docker push arielbm5911/finalproject:latest
                     '''
                 }
