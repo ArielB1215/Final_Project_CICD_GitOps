@@ -144,3 +144,18 @@ Argo CD
 Kubernetes Cluster
 ↓
 Argo Rollouts Canary Deployment
+
+
+
+MY NOTES:
+Commands used:
+
+Image Building - 
+docker build final_project:0.0.1 .
+docker run -t final_project:0.0.1
+
+Jenkins running:
+I had the image in my docker images
+docker run -d --name jenkins -p 8080:8080 jenkins/jenkins:lts
+To get password: docker logs 0fabc
+
