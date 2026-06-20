@@ -159,3 +159,8 @@ I had the image in my docker images
 docker run -d --name jenkins -p 8080:8080 jenkins/jenkins:lts
 To get password: docker logs 0fabc
 
+
+created deployment with the docker image that i created
+created nodeport
+minikube services node-port
+
