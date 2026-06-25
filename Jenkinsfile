@@ -36,6 +36,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Debug Kube') {
+            steps {
+                sh '''
+                echo "HOME=$HOME"
+                kubectl config view
+                kubectl get nodes
+                '''
+            }
+        }
         stage('k8s deployment') {
             steps {
                 sh '''
