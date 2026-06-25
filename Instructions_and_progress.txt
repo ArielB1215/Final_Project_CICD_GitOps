@@ -158,7 +158,12 @@ Jenkins running:
 I had the image in my docker images
 docker run -d --name jenkins -p 8080:8080 jenkins/jenkins:lts
 To get password: docker logs 0fabc
+old - docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 
+updated - docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkins/jenkins:lts
+
+
+downloaded kubectl in container: apt-get update && apt-get install -y curl && curl -LO https://dl.k8s.io/release/v1.35.0/bin/linux/amd64/kubectl && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 created deployment with the docker image that i created
 created nodeport

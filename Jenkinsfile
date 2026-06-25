@@ -37,23 +37,23 @@ pipeline {
             }
         }
 
-        stage('Debug Kube') {
-            steps {
-                sh '''
-                echo "HOME=$HOME"
-                kubectl config view
-                kubectl get nodes
-                '''
-            }
-        }
-        stage('k8s deployment') {
-            steps {
-                sh '''
-                export KUBECONFIG=$HOME/.kube/config
-                kubectl get nodes
-                kubectl apply -f ./k8s/deployment.yaml
-                '''
-            }
-        }
+        // stage('Debug Kube') {
+        //     steps {
+        //         sh '''
+        //         echo "HOME=$HOME"
+        //         kubectl config view
+        //         kubectl get nodes
+        //         '''
+        //     }
+        // }
+        // stage('k8s deployment') {
+        //     steps {
+        //         sh '''
+        //         export KUBECONFIG=$HOME/.kube/config
+        //         kubectl get nodes
+        //         kubectl apply -f ./k8s/deployment.yaml
+        //         '''
+        //     }
+        // }
     }
 }
