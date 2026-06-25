@@ -162,5 +162,5 @@ To get password: docker logs 0fabc
 
 created deployment with the docker image that i created
 created nodeport
-minikube services node-port
+minikube service node-port / kubectl port-forward service/node-port 30007:80
 
