@@ -37,16 +37,11 @@ pipeline {
             }
         }
 
-        stage('Debug Kube') {
-            steps {
-                sh '''
-                kubectl get nodes
-                '''
-            }
-        }
         stage('k8s deployment') {
             steps {
                 sh '''
+                export KUBECONFIG=$HOME/.kube/config
+                kubectl get nodes
                 kubectl apply -f ./k8s/deployment.yaml
                 '''
             }
