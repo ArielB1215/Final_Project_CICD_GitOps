@@ -49,6 +49,8 @@ pipeline {
         stage('k8s deployment') {
             steps {
                 sh '''
+                export KUBECONFIG=$HOME/.kube/config
+                kubectl get nodes
                 kubectl apply -f ./k8s/deployment.yaml
                 '''
             }
