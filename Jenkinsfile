@@ -53,7 +53,7 @@ pipeline {
                 export KUBECONFIG=$HOME/.kube/config
                 kubectl apply -f ./k8s/service.yaml
                 kubectl get svc
-                minikube service node-port
+                kubectl port-forward service/node-port 30007:80
                 '''
             }
         }
