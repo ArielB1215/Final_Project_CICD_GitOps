@@ -43,6 +43,17 @@ pipeline {
                 export KUBECONFIG=$HOME/.kube/config
                 kubectl get nodes
                 kubectl apply -f ./k8s/deployment.yaml
+                kubectl get deployments
+                '''
+            }
+        }
+        stage('k8s service deployment') {
+            steps {
+                sh '''
+                export KUBECONFIG=$HOME/.kube/config
+                kubectl apply -f ./k8s/service.yaml
+                kubectl get svc
+                minikube service node-port
                 '''
             }
         }
