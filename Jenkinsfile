@@ -53,7 +53,7 @@ pipeline {
                 export KUBECONFIG=$HOME/.kube/config
                 kubectl apply -f ./k8s/service.yaml
                 kubectl get svc
-                echo "$(ip route get 1.1.1.1 | awk '{print $7}')"
+                hostname -I
                 sleep 60
                 '''
             }
