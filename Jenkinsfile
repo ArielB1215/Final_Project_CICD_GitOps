@@ -53,9 +53,10 @@ pipeline {
                 export KUBECONFIG=$HOME/.kube/config
                 kubectl apply -f ./k8s/service.yaml
                 kubectl get svc
-                kubectl port-forward service/node-port 30007:80
+                ip route get 1.1.1.1 | awk '{print $7}'
                 '''
             }
+            sleep time: 1, unit: 'MINUTES'
         }
     }
 }
