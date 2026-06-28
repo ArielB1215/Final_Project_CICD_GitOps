@@ -15,7 +15,7 @@ pipeline {
         stage('Trivy Image Scan')
         {
             steps {
-                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && trivy image final_project'
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && trivy image --severity CRITICAL final_project'
             }
         }
         stage('Docker Run') {
