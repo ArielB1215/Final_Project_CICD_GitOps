@@ -12,17 +12,18 @@ pipeline {
                 sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker build -t final_project .'
             }
         }
-        stage('Docker Run') {
-            steps {
-                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker rm -f final_project || true && docker run -d --name final_project final_project && sleep 5 && docker stop final_project'
-            }
-        }
         stage('Trivy Image Scan')
         {
             steps {
                 sh 'trivy image final_project'
             }
         }
+        stage('Docker Run') {
+            steps {
+                sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker rm -f final_project || true && docker run -d --name final_project final_project && sleep 5 && docker stop final_project'
+            }
+        }
+        
         stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
