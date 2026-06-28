@@ -181,3 +181,10 @@ created deployment with the docker image that i created
 created nodeport
 minikube service node-port / kubectl port-forward service/node-port 30007:80
 
+
+downloading trivy on the Jenkins container:
+apt-get update && apt-get install -y wget apt-transport-https gnupg lsb-release && \
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | tee /usr/share/keyrings/trivy.gpg > /dev/null && \
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/trivy.list && \
+apt-get update && apt-get install -y trivy
+
