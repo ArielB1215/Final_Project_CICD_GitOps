@@ -1,0 +1,21 @@
+replicaCount: 2
+
+image:
+  repository: arielbm5911/finalproject
+  tag: latest
+
+service:
+  type: NodePort
+  port: 5000
+  targetPort: 5000
+  nodePort: 30007
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 5000
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 5000
